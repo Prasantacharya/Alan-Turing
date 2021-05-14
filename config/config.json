@@ -1,0 +1,15 @@
+{
+   "server#channel":{
+      "endpoint":"<redacted>",
+      "hours": [6, 8, 15],
+      "question-types":{
+         "algorithm":true,
+         "language-specific":{
+            "true":[
+               "C",
+               "C++"
+            ]
+         }
+      }
+   }
+}
