@@ -11,7 +11,7 @@ const fs = require('fs');
   Object.keys(config).forEach((channel) => {
 
     // calc cron expr
-    let cronExpr = "* " + config[channel]["hours"] + " * * *";
+    let cronExpr = "0 " + config[channel]["hours"] + " * * *";
 
     // scrape and send on whatever hours are required
     cron.schedule(cronExpr, () => {
