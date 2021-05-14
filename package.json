@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/Prasantacharya/Alan-Turing#readme",
   "dependencies": {
+    "fs": "0.0.1-security",
+    "node-cron": "^3.0.0",
     "puppeteer": "^9.1.1"
   }
 }

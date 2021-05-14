@@ -1,8 +1,36 @@
 const puppeteer = require('puppeteer');
+const webhook = require("webhook-discord");
 
-async function get_from_leetcode(){
+// sends the scraped questions in a webhook
+async function sendQuestion(question, endpoint){
+    let color = "#7F8C8D";
+    switch(question["difficulty"]){
+      case "Easy":
+        color = "#2ECC71";
+        break;
+      case "Medium":
+        color = "#F1C40F";
+        break;
+      case "Hard":
+        color = "#E74C3C";
+        break;
+    }
+    const Hook = new webhook.Webhook(endpoint);
+    const msg = new webhook.MessageBuilder()
+                  .setName("Alan Turing")
+                  .setAvatar("https://upload.wikimedia.org/wikipedia/commons/a/a1/Alan_Turing_Aged_16.jpg")
+                  .setColor(color)
+                  .setAuthor(question["title"] + "\nDifficulty: " + question["difficulty"])
+                  .setDescription(question["question"])
+                  .addField('Links:', "[question](" + question["question link"] + ")", true);
+    Hook.send(msg);
+}
+
+// scrapes from leetcode
+async function scrape_leetcode_and_send(endpoint){
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
+  // this makes it so much easier
   await page.goto("https://leetcode.com/problems/random-one-question/all");
 
   // gets the url, name of the problem, and the difficulty
@@ -15,6 +43,7 @@ async function get_from_leetcode(){
             title,
             difficulty];
   });
+
   // gets the actual problem text
   let text = await page.evaluate(() => {
     // this gets the question from leetcode
@@ -32,11 +61,17 @@ async function get_from_leetcode(){
       return retText;
     });
 
-
-
+    // packages it up for the webhook
+    let package = {
+      "title": name,
+      "difficulty": level,
+      "question link": url,
+      "question": text
+    };
+  // sends message
+  await sendQuestion(package,endpoint);
+  // closes the browser
   await browser.close();
-  // const linkArray = document.links;
 
 }
-
-get_from_leetcode();
+module.exports = { scrape_leetcode_and_send };
