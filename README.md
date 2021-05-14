@@ -4,7 +4,7 @@ Alan turing is a discord webhook that sends general programming problems from le
 
 ## Example:
 
-![example]("https://github.com/Prasantacharya/Alan-Turing/blob/main/Example.png")
+Look at Example.png. I would embed it, but for some reason this readme is cursed and wont render it, no matter what I do. 
 
 ## How to add your server
 
