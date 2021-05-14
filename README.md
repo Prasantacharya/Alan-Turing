@@ -27,3 +27,7 @@ Look in `config.json` and you will see something like this:
 `endpoint` is where you supply your discord webhook. [Look here to make a webhook for your channel](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks) **Do not include this in your PR**. If other people get a hold of this, they can spam the channel. Instead, leave it out and after your pr gets approved, message the maintainer your endpoint. They will add it without it being visible to everyone. If your webhook is comprimised, just delete the webhook, and you wont get spammed.
 
 `hours` is what hours of the day you want Turing to message. Works on 24 hour time, and can only be hours for now.
+
+## How to run
+
+After running `npm install`, and editing `config.json`, run `node main.js` to start.
